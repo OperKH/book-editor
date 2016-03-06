@@ -1,88 +1,90 @@
 export class pagesService {
-    constructor ($q, $timeout, $log) {
+    constructor (Firebase, $rootScope, $log) {
         'ngInject';
 
+        this.$rootScope = $rootScope;
         this.$log = $log;
 
-        this.createDefered = (resolveData, errorMessage) => {
-            let deferred = $q.defer();
-            $timeout(() => {
-                if (resolveData) {
-                    deferred.resolve(resolveData);
-                } else {
-                    deferred.reject(errorMessage);
-                }
-            }, 1000);
-            return deferred;
-        };
+        const rootRef = new Firebase('https://book-editor.firebaseio.com/');
+        const pagesRef = rootRef.child('pages');
 
+        this.firebasePaegesRef = pagesRef;
     }
 
     add(pageName, obj) {
         this.$log.log('Call pagesService add');
 
-        let pages = getPages();
-        pages[pageName] = obj;
-        savePages(pages);
+        //Not tested;
+        const pageRef = this.firebasePaegesRef.child(pageName);
+        const promise = pageRef.set(obj).then(snapshot => snapshot.val());
 
-        let errorMessage = `Could not add page: ${pageName}`;
-        let deferred = this.createDefered(obj, errorMessage);
-        return deferred.promise;
+        promise.then(() => {
+            this.$rootScope.$applyAsync();
+        });
+
+        return promise;
     }
 
     remove(pageName) {
         this.$log.log('Call pagesService remove');
 
-        let pages = getPages();
-        delete pages[pageName];
-        savePages(pages);
+        this.$log.log('Call pagesService add');
 
-        let resolveData = `Successfully removed page: ${pageName}`;
-        let errorMessage = `Could not remove page: ${pageName}`;
-        let deferred = this.createDefered(resolveData, errorMessage);
-        return deferred.promise;
+        //Not tested;
+        const pageRef = this.firebasePaegesRef.child(pageName);
+        const promise = pageRef.remove().then(snapshot => snapshot.val());
+
+        promise.then(() => {
+            this.$rootScope.$applyAsync();
+        });
+
+        return promise;
     }
 
     update(pageName, obj) {
         this.$log.log('Call pagesService update');
 
-        let pages = getPages();
-        pages[pageName] = obj;
-        savePages(pages);
+        //Not tested;
+        const pageRef = this.firebasePaegesRef.child(pageName);
+        const promise = pageRef.set(obj).then(snapshot => snapshot.val());
 
-        let errorMessage = `Could not save page: ${pageName}`;
-        let deferred = this.createDefered(obj, errorMessage);
-        return deferred.promise;
+        promise.then(() => {
+            this.$rootScope.$applyAsync();
+        });
+
+        return promise;
     }
 
     get(pageName) {
         this.$log.log('Call pagesService get');
 
-        let pages = getPages();
-        let page = pages[pageName];
+        const pageRef = this.firebasePaegesRef.child(pageName);
+        const promise = pageRef.once("value").then(snapshot => snapshot.val());
 
-        let errorMessage = `No pages with name: ${pageName}`;
-        let deferred = this.createDefered(page, errorMessage);
-        return deferred.promise;
+        promise.then(() => {
+            this.$rootScope.$applyAsync();
+        });
+
+        return promise;
     }
 
     list() {
         this.$log.log('Call pagesService list');
 
-        let pages = getPages();
-        let pagesList = Object.keys(pages);
+        const promise = this.firebasePaegesRef.once("value")
+            .then(snapshot => {
+                let pagesList = [];
+                snapshot.forEach(pageSnapshot => {
+                    pagesList.push(pageSnapshot.key());
+                });
+                return pagesList;
+            });
 
-        let errorMessage = `No pagesList`;
-        let deferred = this.createDefered(pagesList, errorMessage);
-        return deferred.promise;
+            promise.then(() => {
+                this.$rootScope.$applyAsync();
+            });
+
+        return promise;
     }
 
-}
-
-function getPages() {
-    var pages = angular.fromJson(localStorage.getItem('pages'));
-    return pages;
-}
-function savePages(pages) {
-    localStorage.setItem('pages', angular.toJson(pages));
 }

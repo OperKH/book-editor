@@ -1,4 +1,4 @@
-/* global moment:false */
+/* global moment:false, Firebase:false */
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -14,6 +14,7 @@ import { pagesConstant } from '../app/components/pagesConstant/pagesConstant.con
 
 angular.module('bookEditor', ['ngAnimate', 'ngSanitize', 'ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap'])
   .constant('moment', moment)
+  .constant('Firebase', Firebase)
   .constant('pagesConstant', pagesConstant)
   .config(config)
   .config(routerConfig)
