@@ -40,14 +40,6 @@ function testServiceFn(fnName) {
     }));
 
     it('should be function', inject(pagesService => {
-        expect(typeof(pagesService[fnName])).toEqual("function");
+        expect(pagesService[fnName]).toEqual(jasmine.any(Function));
     }));
-
-    it('should return object', inject(pagesService => {
-        expect(typeof(pagesService[fnName]())).toEqual("object");
-    }));
-    it('should return object with promise', inject(pagesService => {
-        expect(pagesService[fnName]().hasOwnProperty('$$state')).toBeTruthy();
-    }));
-
 }
