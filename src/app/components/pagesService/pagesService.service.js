@@ -1,43 +1,38 @@
 export class pagesService {
-    constructor (Firebase, $rootScope, $log) {
+    constructor ($resource, $log) {
         'ngInject';
 
-        this.$rootScope = $rootScope;
         this.$log = $log;
 
-        const rootRef = new Firebase('https://book-editor.firebaseio.com/');
-        const pagesRef = rootRef.child('pages');
-
-        this.firebasePaegesRef = pagesRef;
+        this.pagesResource = () => $resource('https://book-editor.firebaseio.com/pages/:pageName.json', {}, {
+            get: {
+                method: 'GET',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            },
+            save: {
+                method: 'POST',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            },
+            remove: {
+                method: 'DELETE',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            }
+        });
     }
 
     add(pageName, obj) {
         this.$log.log('Call pagesService add');
 
         //Not tested;
-        const pageRef = this.firebasePaegesRef.child(pageName);
-        const promise = pageRef.set(obj).then(snapshot => snapshot.val());
-
-        promise.then(() => {
-            this.$rootScope.$applyAsync();
-        });
-
+        const promise = this.pagesResource().save({pageName}, obj).$promise.then(resp => resp.data);
         return promise;
     }
 
     remove(pageName) {
         this.$log.log('Call pagesService remove');
 
-        this.$log.log('Call pagesService add');
-
         //Not tested;
-        const pageRef = this.firebasePaegesRef.child(pageName);
-        const promise = pageRef.remove().then(snapshot => snapshot.val());
-
-        promise.then(() => {
-            this.$rootScope.$applyAsync();
-        });
-
+        const promise = this.pagesResource().remove({pageName}).$promise.then(resp => resp.data);
         return promise;
     }
 
@@ -45,45 +40,21 @@ export class pagesService {
         this.$log.log('Call pagesService update');
 
         //Not tested;
-        const pageRef = this.firebasePaegesRef.child(pageName);
-        const promise = pageRef.set(obj).then(snapshot => snapshot.val());
-
-        promise.then(() => {
-            this.$rootScope.$applyAsync();
-        });
-
+        const promise = this.pagesResource().save({pageName}, obj).$promise.then(resp => resp.data);
         return promise;
     }
 
     get(pageName) {
         this.$log.log('Call pagesService get');
 
-        const pageRef = this.firebasePaegesRef.child(pageName);
-        const promise = pageRef.once("value").then(snapshot => snapshot.val());
-
-        promise.then(() => {
-            this.$rootScope.$applyAsync();
-        });
-
+        const promise = this.pagesResource().get({pageName}).$promise.then(resp => resp.data);
         return promise;
     }
 
     list() {
         this.$log.log('Call pagesService list');
 
-        const promise = this.firebasePaegesRef.once("value")
-            .then(snapshot => {
-                let pagesList = [];
-                snapshot.forEach(pageSnapshot => {
-                    pagesList.push(pageSnapshot.key());
-                });
-                return pagesList;
-            });
-
-            promise.then(() => {
-                this.$rootScope.$applyAsync();
-            });
-
+        const promise = this.pagesResource().get().$promise.then(resp => Object.keys(resp.data));
         return promise;
     }
 
