@@ -80,6 +80,7 @@ export class pagesService {
         this.$log.log('Call pagesService list');
 
         const pages = this.getPages();
+
         const pagesList = Object.keys(pages);
 
         const errorMessage = `No pagesList`;
