@@ -8,7 +8,7 @@ describe('service pagesService', () => {
     describe('pagesService add', () => {
         const fnName = 'add';
         const pageName = 'jasminePage';
-        const url = 'https://book-editor.firebaseio.com/pages/'+pageName+'.json';
+        const url = `https://book-editor.firebaseio.com/pages/${pageName}.json`;
         testServiceFn(fnName);
 
         it('should reject a promise on error', inject((pagesService, $httpBackend) => {
@@ -28,7 +28,7 @@ describe('service pagesService', () => {
     describe('pagesService remove', () => {
         const fnName = 'remove';
         const pageName = 'jasminePage';
-        const url = 'https://book-editor.firebaseio.com/pages/'+pageName+'.json';
+        const url = `https://book-editor.firebaseio.com/pages/${pageName}.json`;
         testServiceFn(fnName);
 
         it('should reject a promise on error', inject((pagesService, $httpBackend) => {
@@ -49,7 +49,7 @@ describe('service pagesService', () => {
     describe('pagesService update', () => {
         const fnName = 'update';
         const pageName = 'jasminePage';
-        const url = 'https://book-editor.firebaseio.com/pages/'+pageName+'.json';
+        const url = `https://book-editor.firebaseio.com/pages/${pageName}.json`;
         testServiceFn(fnName);
 
         it('should reject a promise on error', inject((pagesService, $httpBackend) => {
@@ -70,7 +70,7 @@ describe('service pagesService', () => {
     describe('pagesService get', () => {
         const fnName = 'get';
         const pageName = 'jasminePage';
-        const url = 'https://book-editor.firebaseio.com/pages/'+pageName+'.json';
+        const url = `https://book-editor.firebaseio.com/pages/${pageName}.json`;
         testServiceFn(fnName);
 
         it('should return data', inject((pagesService, $httpBackend) => {
