@@ -4,6 +4,7 @@ import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
+import { PageController } from './page/page.controller';
 import { pagesService } from '../app/components/pagesService/pagesService.service';
 import { pagesConstant } from '../app/components/pagesConstant/pagesConstant.constant';
 // import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
@@ -22,6 +23,7 @@ angular.module('bookEditor', ['ngAnimate', 'ngSanitize', 'ngMessages', 'ngResour
   // .service('githubContributor', GithubContributorService)
   // .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
+  .controller('PageController', PageController)
   // .directive('acmeNavbar', NavbarDirective)
   // .directive('acmeMalarkey', MalarkeyDirective)
   ;
