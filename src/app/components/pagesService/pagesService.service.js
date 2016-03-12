@@ -1,88 +1,61 @@
 export class pagesService {
-    constructor ($q, $timeout, $log) {
+    constructor ($resource, $log) {
         'ngInject';
 
         this.$log = $log;
 
-        this.createDefered = (resolveData, errorMessage) => {
-            let deferred = $q.defer();
-            $timeout(() => {
-                if (resolveData) {
-                    deferred.resolve(resolveData);
-                } else {
-                    deferred.reject(errorMessage);
-                }
-            }, 1000);
-            return deferred;
-        };
-
+        this.pagesResource = () => $resource('https://book-editor.firebaseio.com/pages/:pageName.json', {}, {
+            get: {
+                method: 'GET',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            },
+            save: {
+                method: 'POST',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            },
+            remove: {
+                method: 'DELETE',
+                transformResponse: data => ({data: angular.fromJson(data)})
+            }
+        });
     }
 
     add(pageName, obj) {
         this.$log.log('Call pagesService add');
 
-        let pages = getPages();
-        pages[pageName] = obj;
-        savePages(pages);
-
-        let errorMessage = `Could not add page: ${pageName}`;
-        let deferred = this.createDefered(obj, errorMessage);
-        return deferred.promise;
+        //Not tested;
+        const promise = this.pagesResource().save({pageName}, obj).$promise.then(resp => resp.data);
+        return promise;
     }
 
     remove(pageName) {
         this.$log.log('Call pagesService remove');
 
-        let pages = getPages();
-        delete pages[pageName];
-        savePages(pages);
-
-        let resolveData = `Successfully removed page: ${pageName}`;
-        let errorMessage = `Could not remove page: ${pageName}`;
-        let deferred = this.createDefered(resolveData, errorMessage);
-        return deferred.promise;
+        //Not tested;
+        const promise = this.pagesResource().remove({pageName}).$promise.then(resp => resp.data);
+        return promise;
     }
 
     update(pageName, obj) {
         this.$log.log('Call pagesService update');
 
-        let pages = getPages();
-        pages[pageName] = obj;
-        savePages(pages);
-
-        let errorMessage = `Could not save page: ${pageName}`;
-        let deferred = this.createDefered(obj, errorMessage);
-        return deferred.promise;
+        //Not tested;
+        const promise = this.pagesResource().save({pageName}, obj).$promise.then(resp => resp.data);
+        return promise;
     }
 
     get(pageName) {
         this.$log.log('Call pagesService get');
 
-        let pages = getPages();
-        let page = pages[pageName];
-
-        let errorMessage = `No pages with name: ${pageName}`;
-        let deferred = this.createDefered(page, errorMessage);
-        return deferred.promise;
+        const promise = this.pagesResource().get({pageName}).$promise.then(resp => resp.data);
+        return promise;
     }
 
     list() {
         this.$log.log('Call pagesService list');
 
-        let pages = getPages();
-        let pagesList = Object.keys(pages);
-
-        let errorMessage = `No pagesList`;
-        let deferred = this.createDefered(pagesList, errorMessage);
-        return deferred.promise;
+        const promise = this.pagesResource().get().$promise.then(resp => Object.keys(resp.data));
+        return promise;
     }
 
-}
-
-function getPages() {
-    var pages = angular.fromJson(localStorage.getItem('pages'));
-    return pages;
-}
-function savePages(pages) {
-    localStorage.setItem('pages', angular.toJson(pages));
 }
