@@ -12,6 +12,7 @@ import { pagesConstant } from '../app/components/pagesConstant/pagesConstant.con
 // import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
 angular.module('bookEditor', ['ngAnimate', 'ngSanitize', 'ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap'])
+  .constant('Storage', localStorage)
   .constant('moment', moment)
   .constant('pagesConstant', pagesConstant)
   .config(config)

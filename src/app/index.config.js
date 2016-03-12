@@ -1,11 +1,11 @@
-export function config($logProvider, pagesConstant) {
+export function config($logProvider, pagesConstant, Storage) {
     'ngInject';
     // Enable log
     $logProvider.debugEnabled(true);
 
-    if (!localStorage.getItem('pages')) {
+    if (!Storage.getItem('pages')) {
         let pages = pagesConstant();
-        localStorage.setItem('pages', angular.toJson(pages));
+        Storage.setItem('pages', angular.toJson(pages));
     }
 
 }
