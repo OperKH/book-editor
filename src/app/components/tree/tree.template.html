@@ -1,0 +1,6 @@
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="page in $ctrl.pagesListArray" track by $index>
+        <a ui-sref="home.page({pageName: page})">{{page}}</a>
+        <tree ng-if="$ctrl.pagesList[page].children" pages-list="$ctrl.pagesList[page].children"></tree>
+    </li>
+</ul>

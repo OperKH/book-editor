@@ -1,11 +1,7 @@
 export class MainController {
-    constructor (pagesService, $log) {
+    constructor (list, $log) {
         'ngInject';
 
-        pagesService.list().then((data) => {
-            this.pagesList = data;
-        }).catch((error) => {
-            $log.log(error);
-        });
+        this.pagesList = list;
     }
 }

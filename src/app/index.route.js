@@ -5,12 +5,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             url: '/',
             templateUrl: 'app/main/main.html',
             controller: 'MainController',
-            controllerAs: 'main'
-        });
+            controllerAs: 'main',
+            resolve: {
+                list: (pagesService) => pagesService.list()
+            }
+        })
 
-    $stateProvider
-        .state('page', {
-            url: '/page/:pageName',
+        .state('home.page', {
+            url: 'page/:pageName',
             templateUrl: 'app/page/page.html',
             controller: 'PageController',
             controllerAs: 'pageCtrl'

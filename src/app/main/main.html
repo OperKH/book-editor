@@ -3,15 +3,19 @@
         <h2>Theis Is the Main Page</h2>
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="pages-list">
                 <h3>Pages List:</h3>
-                <ul class="list-group">
+<!--                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="page in main.pagesList">
-                        <a href="#/page/{{page}}">{{page}}</a>
+                        <a ui-sref="home.page({pageName: page})">{{page}}</a>
                     </li>
-                </ul>
+                </ul> -->
+                <tree pages-list="main.pagesList.children"></tree>
             </div>
+        </div>
+        <div class="col-sm-9">
+            <div ui-view></div>
         </div>
     </div>
 
