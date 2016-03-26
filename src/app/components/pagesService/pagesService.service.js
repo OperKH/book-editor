@@ -47,7 +47,7 @@ export class pagesService {
                     return this.pagesResource().update(config, newChildren).$promise.then(resp => resp.data);
                 });
             } else {
-                $q.reject('parentPageName not recieved');
+                return $q.reject('parentPageName not recieved');
             }
         };
 
