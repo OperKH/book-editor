@@ -13,7 +13,7 @@ import { treeComponent } from '../app/components/tree/tree.component';
 // import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 // import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
-angular.module('bookEditor', ['ngAnimate', 'ngSanitize', 'ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap'])
+angular.module('bookEditor', ['ngAnimate', 'ngSanitize', 'ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap', 'btford.markdown'])
   .constant('moment', moment)
   .constant('pagesConstant', pagesConstant)
   .config(config)

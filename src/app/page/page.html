@@ -3,6 +3,16 @@
     <br>
     <div class="panel panel-default">
         <div class="panel-heading">{{pageCtrl.page.title}}</div>
-        <div class="panel-body">{{pageCtrl.page.text}}</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <textarea class="" ng-model="pageCtrl.page.text"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel-body" btf-markdown="pageCtrl.page.text"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
