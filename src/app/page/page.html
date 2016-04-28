@@ -1,18 +1,19 @@
-<div class="col-sm-12">
+<div class="book-page col-sm-12">
     <div><h5><i>pageName: {{pageCtrl.pageName}}</i></h5></div>
     <br>
     <div class="panel panel-default">
-        <div class="panel-heading">{{pageCtrl.page.title}}</div>
+        <div class="panel-heading">
+            <span>{{pageCtrl.page.title}}</span>
+        </div>
         <div class="panel-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <textarea class="" ng-model="pageCtrl.page.text"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel-body" btf-markdown="pageCtrl.page.text"></div>
+                <div class="pages-wraper row">
+                    <ui-view ng-class="pageCtrl.$state.$current.includes['home.page.edit'] ? 'page-editor' : 'hidden'"></ui-view>
+                    <div class="page-preview">
+                        <h2>Preview:</h2>
+                        <div btf-markdown="pageCtrl.page.text" style="flex: 1"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
