@@ -4,6 +4,17 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <span>{{pageCtrl.page.title}}</span>
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary btn-xs" ng-if="pageCtrl.$state.$current.includes['home.page.edit']">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> Save the Page
+                </button>
+                <button type="button" class="btn btn-warning btn-xs" ui-sref="home.page" ui-sref-opts="{pageName: page}" ng-if="pageCtrl.$state.$current.includes['home.page.edit']">
+                    <span class="glyphicon glyphicon-floppy-remove"></span> Close Editor
+                </button>
+                <button type="button" class="btn btn-info btn-xs" ui-sref="home.page.edit" ui-sref-opts="{pageName: page}" ng-if="!pageCtrl.$state.$current.includes['home.page.edit']">
+                    <span class="glyphicon glyphicon-edit"></span> Edit the Page
+                </button>
+            </div>
         </div>
         <div class="panel-body">
                 <div class="pages-wraper row">

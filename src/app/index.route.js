@@ -12,10 +12,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         })
 
         .state('home.page', {
-            url: 'page/:pageName',
+            url: 'page/:pageName/',
             templateUrl: 'app/page/page.html',
             controller: 'PageController',
             controllerAs: 'pageCtrl'
+        })
+        .state('home.page.edit', {
+            url: 'edit',
+            templateUrl: 'app/page/page-editor.html'
         });
 
 
