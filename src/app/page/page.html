@@ -18,10 +18,14 @@
         </div>
         <div class="panel-body">
                 <div class="pages-wraper row">
-                    <ui-view ng-class="pageCtrl.$state.$current.includes['home.page.edit'] ? 'page-editor' : 'hidden'"></ui-view>
-                    <div class="page-preview">
-                        <h2>Preview:</h2>
-                        <div btf-markdown="pageCtrl.page.text" style="flex: 1"></div>
+                    <div ng-class="pageCtrl.$state.$current.includes['home.page.edit'] ? 'col-sm-6' : 'hidden'">
+                        <ui-view></ui-view>
+                    </div>
+                    <div ng-class="pageCtrl.$state.$current.includes['home.page.edit'] ? 'col-sm-6' : 'col-sm-12'">
+                        <div class="page-preview">
+                            <h2>Preview:</h2>
+                            <div btf-markdown="pageCtrl.page.text" style="flex: 1"></div>
+                        </div>
                     </div>
                 </div>
             </div>

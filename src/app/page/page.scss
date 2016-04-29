@@ -1,15 +1,13 @@
 .book-page {
     .pages-wraper {
-        display: flex;
-        align-items: stretch;
         .page-preview {
             border: 1px solid #ccc;
             border-radius: 4px;
-            padding: 0 15px 15px 15px;
-            flex: 1;
-            width: calc(50% - 30px);
-            margin: 0 15px;
             word-wrap: break-word;
+            padding: 0 15px;
+            > h2 {
+                border-bottom: 1px solid #ccc;
+            }
         }
         .page-editor {
             @extend .page-preview;
@@ -21,8 +19,8 @@
                 overflow-y: auto;
                 min-height: 180px;
                 height: calc(100vh - 360px);
+                margin: 0 0 10px;
             }
         }
     }
-
 }
