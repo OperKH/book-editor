@@ -1,4 +1,16 @@
 .book-page {
+    .edit-title {
+        padding: 5px;
+        outline: none;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        &:disabled {
+            padding: 5px 0;
+            border: none;
+            background-color: transparent;
+        }
+    }
     .pages-wraper {
         .page-preview {
             border: 1px solid #ccc;

@@ -1,17 +1,35 @@
 <div class="book-page col-sm-12">
-    <div><h5><i>pageName: {{pageCtrl.pageName}}</i></h5></div>
-    <br>
+    <div>
+        <h3>Page Block:</h3>
+    </div>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <span>{{pageCtrl.page.title}}</span>
+        <div class="panel-heading clearfix">
+            <span><b>Page:</b> {{::pageCtrl.pageName}}; <b>Title:</b> </span>
+            <input  type="text"
+                    class="edit-title"
+                    ng-model="pageCtrl.page.title"
+                    ng-disabled="!pageCtrl.$state.$current.includes['home.page.edit']"
+                    ng-change="pageCtrl.pageChanged()"
+                    >
             <div class="pull-right">
-                <button type="button" class="btn btn-primary btn-xs" ng-if="pageCtrl.$state.$current.includes['home.page.edit']">
+                <button type="button"
+                        class="btn btn-primary btn-xs"
+                        ng-if="pageCtrl.$state.$current.includes['home.page.edit']"
+                        ng-click="pageCtrl.savePage()"
+                        ng-disabled = "pageCtrl.isSaveDisabled"
+                        >
                     <span class="glyphicon glyphicon-floppy-disk"></span> Save the Page
                 </button>
-                <button type="button" class="btn btn-warning btn-xs" ui-sref="home.page" ui-sref-opts="{pageName: page}" ng-if="pageCtrl.$state.$current.includes['home.page.edit']">
+                <button type="button"
+                        class="btn btn-warning btn-xs"
+                        ng-if="pageCtrl.$state.$current.includes['home.page.edit']"
+                        ui-sref="home.page"
+                        >
                     <span class="glyphicon glyphicon-floppy-remove"></span> Close Editor
                 </button>
-                <button type="button" class="btn btn-info btn-xs" ui-sref="home.page.edit" ui-sref-opts="{pageName: page}" ng-if="!pageCtrl.$state.$current.includes['home.page.edit']">
+                <button type="button" class="btn btn-info btn-xs"
+                        ui-sref="home.page.edit"
+                        ng-if="!pageCtrl.$state.$current.includes['home.page.edit']">
                     <span class="glyphicon glyphicon-edit"></span> Edit the Page
                 </button>
             </div>

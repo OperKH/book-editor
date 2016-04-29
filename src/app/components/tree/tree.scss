@@ -1,5 +1,10 @@
 tree {
-    ul {
-        padding-top: 10px;
+    > ul {
+        ul {
+            padding-top: 10px;
+        }
+    }
+    .open-close-btn  {
+        cursor: pointer;
     }
 }

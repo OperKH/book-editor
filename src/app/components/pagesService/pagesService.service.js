@@ -76,6 +76,16 @@ export class pagesService {
     }
 
     add(pageName, obj, parentPageName) {
+        if (!pageName) {
+            return $q.reject('No pageName');
+        }
+        if (!obj) {
+            return $q.reject('No page');
+        }
+        if (!obj) {
+            return $q.reject('No parentPageName');
+        }
+        
         const {$log, pagesResource, pagesStructureKey, updateStructure, $q} = this;
         $log.log('Call pagesService add');
 
@@ -149,6 +159,3 @@ export class pagesService {
     }
 
 }
-
-
-

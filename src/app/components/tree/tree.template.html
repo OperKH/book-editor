@@ -1,7 +1,7 @@
 <ul class="list-group">
     <li class="list-group-item" ng-click="$ctrl.toggleOpened(page); $event.stopPropagation();" ng-repeat="page in $ctrl.pagesListArray" track by $index >
         <i  ng-if="$ctrl.pagesList[page].children"
-            class="pull-right glyphicon"
+            class="open-close-btn pull-right glyphicon"
             ng-class="$ctrl.isOpened(page) ? 'glyphicon-menu-down' : 'glyphicon-menu-right'">
         </i>
         <a ui-sref="home.page({pageName: page})" ng-click="$event.stopPropagation()">{{page}}</a>

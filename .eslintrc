@@ -13,6 +13,13 @@
   "globals": {
     "angular": true,
     "module": true,
-    "inject": true
+    "inject": true,
+    "moment": true
+  },
+  "rules": {
+    "semi": [1, "always"],
+    "no-debugger": 1,
+    "no-unused-vars": 1,
+    "angular/on-watch": 1
   }
 }
